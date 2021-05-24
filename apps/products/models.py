@@ -37,7 +37,7 @@ class Product(models.Model):
                                  on_delete=models.SET_NULL,
                                  related_name='products',
                                  null=True)
-    pictures = models.ManyToManyField(to=Picture,
+    pictures = models.ManyToManyField(to=Picture,blank=True,
                                       related_name='product_pictures')
 
     class Meta:
@@ -82,3 +82,23 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.text[:100]}...'
+
+
+class Banner(models.Model):
+    image = models.ImageField(verbose_name='Изображение', upload_to=upload_instance,
+                              )
+    title = models.CharField(verbose_name='Заголовок',
+                             max_length=255)
+    description = models.TextField(verbose_name='Описание')
+    product = models.ForeignKey(to=Product,
+                                on_delete=models.SET_NULL,
+                                related_name='banner',
+                                null=True
+                                )
+
+    class Meta:
+        verbose_name = 'Баннер'
+        verbose_name_plural = 'Баннеры'
+
+    def __str__(self):
+        return self.title

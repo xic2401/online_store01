@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.products.models import Category, Product, Picture, Rating, Comment
+from apps.products.models import Category, Product, Picture, Rating, Comment, Banner
 
 
 @admin.register(Category)
@@ -26,3 +26,8 @@ class RatingAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['text', 'product', 'user']
+
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ['title']
